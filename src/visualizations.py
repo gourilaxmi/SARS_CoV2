@@ -1,12 +1,11 @@
 """
 visualizations.py
 =================
-Produces all main figures from the paper replication:
-  Fig 1-equivalent: Weekly proportion with infectors in settings
-  Fig 2-equivalent: Age-structured transmission matrices
-  Fig 3-equivalent: Cluster summary statistics by variant
-  Fig 4-equivalent: Reproduction numbers and overdispersion
-  Fig 5-equivalent: NPI effect sizes + vaccination IRR
+  Fig 1: Weekly proportion with infectors in settings
+  Fig 2: Age-structured transmission matrices
+  Fig 3: Cluster summary statistics by variant
+  Fig 4: Reproduction numbers and overdispersion
+  Fig 5: NPI effect sizes + vaccination IRR
 """
 
 import numpy as np
@@ -463,4 +462,4 @@ def plot_summary_dashboard(weekly_props, od_setting, all_results, cluster_summar
     print(f"  Saved: {output_path}")
 
 if __name__ == "__main__":
-    print("Run main.py to generate all figures.")
+    print("main.py generate all figures.")
