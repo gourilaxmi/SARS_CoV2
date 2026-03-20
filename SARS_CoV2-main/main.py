@@ -65,7 +65,7 @@ RESULTS_DIR = os.path.join("outputs", "results")
 for d in [FIGURES_DIR, CSV_DIR, RESULTS_DIR]:
     os.makedirs(d, exist_ok=True)
 
-N_TREES = 20   
+N_TREES = 20   # paper uses 100; 20 is fast and sufficient for replication
 
 
 def parse_args():
