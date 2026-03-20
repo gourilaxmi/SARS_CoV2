@@ -21,7 +21,7 @@ from collections import Counter
 
 RNG = np.random.default_rng(42)
 
-CLUSTER_MIN_SIZE = 5   # clusters must be larger than this
+CLUSTER_MIN_SIZE = 5  
 
 # ── Build graph based on shared settings ───────────────────────────────────────
 def build_settings_subgraph(G: nx.DiGraph, social_network: dict) -> nx.Graph:
@@ -165,7 +165,7 @@ def generate_randomised_network(G: nx.DiGraph,
             if not out_edges:
                 continue
             
-            k = len(out_edges)  # number of outgoing edges
+            k = len(out_edges)  
             
             t_u = date_map.get(u)
             if t_u is None:
