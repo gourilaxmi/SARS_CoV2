@@ -5,7 +5,7 @@ transmission_clusters.py
 This module identifies and analyzes transmission clusters by combining
 the transmission network (G) with the social network (N).
 
-Main idea (based on the paper):
+Main idea:
   - Keep only edges where two individuals share at least one setting
   - Treat the remaining graph as undirected
   - Connected components with size > 5 are considered clusters
