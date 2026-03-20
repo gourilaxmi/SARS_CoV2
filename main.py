@@ -1,19 +1,8 @@
 """
-main.py
-=======
-GYAN — Paper Replication
 Transmission Networks and Intervention Effects from
 SARS-CoV-2 Genomic and Social Network Data in Denmark
 Based on: Curran-Sebastian et al. (2026, medRxiv)
 
-USAGE:
-    python main.py                        # runs with simulated genomes
-    python main.py --fasta data/sequences.fasta   # runs with real NCBI sequences
-
-OUTPUT FOLDERS:
-    outputs/figures/    all plots (PNG)
-    outputs/csv/        all data tables (CSV)
-    outputs/results/    summary results (TXT)
 """
 
 import os
@@ -26,7 +15,6 @@ import pandas as pd
 # Fix Unicode encoding on Windows
 sys.stdout.reconfigure(encoding='utf-8')
 
-# ── Add src/ to path so imports work ──────────────────────────────────────────
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
 
 from data_generation       import generate_all
@@ -57,7 +45,7 @@ from visualizations        import (plot_weekly_proportions,
                                     plot_npi_effects,
                                     plot_summary_dashboard)
 
-# ── Output folders ─────────────────────────────────────────────────────────────
+# Output folders 
 FIGURES_DIR = os.path.join("outputs", "figures")
 CSV_DIR     = os.path.join("outputs", "csv")
 RESULTS_DIR = os.path.join("outputs", "results")
@@ -85,20 +73,18 @@ def parse_args():
 
 
 def section(title):
-    print(f"\n{'='*60}")
     print(f"  {title}")
-    print(f"{'='*60}")
 
 
 def main():
     args   = parse_args()
     start  = time.time()
 
-    # ── STEP 1: Data Generation ───────────────────────────────────────────────
+    # STEP 1: Data Generation 
     section("STEP 1 — Data Generation")
     pop, genomes, social, npi = generate_all(fasta_path=args.fasta)
 
-    # ── STEP 2: Transmission Network ─────────────────────────────────────────
+    # STEP 2: Transmission Network 
     section("STEP 2 — Building Transmission Network G")
     t0 = time.time()
     G  = build_transmission_network(pop, genomes)
@@ -107,7 +93,7 @@ def main():
     print(f"  Nodes: {G.number_of_nodes():,} | Edges: {G.number_of_edges():,} "
           f"| Setting-linked: {shared:,}  [{time.time()-t0:.1f}s]")
 
-    # ── STEP 3: Tree Sampling ─────────────────────────────────────────────────
+    # STEP 3: Tree Sampling
     section(f"STEP 3 — Sampling {args.trees} Transmission Trees")
     t0       = time.time()
     ps_trees = sample_prioritised_settings_tree(G, n_trees=args.trees)
@@ -124,7 +110,7 @@ def main():
     for s, c in setting_counts.most_common():
         print(f"    {s:15s}: {c:7,}  ({100*c/total_ev:.1f}%)")
 
-    # ── STEP 4: Clusters ──────────────────────────────────────────────────────
+    # STEP 4: Clusters 
     section("STEP 4 — Transmission Cluster Analysis")
     t0       = time.time()
     VN       = build_settings_subgraph(G, social)
@@ -141,7 +127,7 @@ def main():
         rand_clusters.append(extract_clusters(
             build_settings_subgraph(rn, social), pop, social))
 
-    # ── STEP 5: Reproduction Numbers ─────────────────────────────────────────
+    # STEP 5: Reproduction Numbers 
     section("STEP 5 — Reproduction Numbers & Overdispersion")
     t0      = time.time()
     rc_df   = compute_individual_Rc(ps_trees, pop, social)
@@ -154,7 +140,7 @@ def main():
     print(f"\n  Overdispersion by setting:")
     print(od_set[["setting","mean","k"]].to_string(index=False))
 
-    # ── STEP 6: NPI Regression ────────────────────────────────────────────────
+    # STEP 6: NPI Regression 
     section("STEP 6 — NPI Effectiveness Regression")
     t0         = time.time()
     reg_data   = build_regression_data(rc_df, npi)
@@ -185,8 +171,7 @@ def main():
         print(f"\n  Vaccination effects:")
         print(vacc.to_string(index=False))
 
-    # ── STEP 7: Save CSVs ────────────────────────────────────────────────────
-    section("STEP 7 — Saving CSV Outputs")
+    section(" Save CSV Outputs")
     csv_files = {
         "cluster_summary.csv":            cl_sum,
         "overdispersion_by_setting.csv":  od_set,
@@ -203,7 +188,7 @@ def main():
         print(f"  Saved: outputs/csv/{fname}")
 
     # ── STEP 8: Figures ───────────────────────────────────────────────────────
-    section("STEP 8 — Generating Figures")
+    section(" Generate Figures")
 
     plot_weekly_proportions(
         w_prop,
@@ -232,13 +217,10 @@ def main():
         cl_sum,
         output_path=os.path.join(FIGURES_DIR, "fig0_summary_dashboard.png"))
 
-    # ── STEP 9: Write Results Summary ────────────────────────────────────────
-    section("STEP 9 — Writing Results Summary")
+  
+    section("Summary")
     summary_path = os.path.join(RESULTS_DIR, "summary.txt")
     with open(summary_path, "w", encoding="utf-8") as f:
-        f.write("GYAN REPLICATION — RESULTS SUMMARY\n")
-        f.write("="*55 + "\n")
-        f.write(f"Based on: Curran-Sebastian et al. 2026, medRxiv\n\n")
         f.write(f"DATA SOURCES\n")
         f.write(f"  Genomes    : {'Real NCBI FASTA' if args.fasta else 'Simulated (Poisson model)'}\n")
         f.write(f"  Network    : POLYMOD (Mossong et al. 2008)\n")
