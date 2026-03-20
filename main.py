@@ -12,7 +12,6 @@ import argparse
 import numpy as np
 import pandas as pd
 
-# Fix Unicode encoding on Windows
 sys.stdout.reconfigure(encoding='utf-8')
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
