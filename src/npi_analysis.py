@@ -5,7 +5,7 @@ npi_analysis.py
 This script estimates how effective different NPIs (Non-Pharmaceutical Interventions)
 and vaccinations are by running regression on individual reproduction numbers.
 
-Approach (inspired by the paper):
+Approach:
   - We regress individual Rc values on:
       • NPI levels (with a 5-day lag)
       • Vaccination status
@@ -116,7 +116,7 @@ def neg_binomial_glm(y: np.ndarray, X: np.ndarray,
     except Exception:
         beta0 = np.zeros(p)
 
-    x0 = np.concatenate([beta0, [0.0]])  # log_k = 0 → k = 1
+    x0 = np.concatenate([beta0, [0.0]]) 
 
     res = minimize(nb_nll, x0, method="L-BFGS-B",
                    options={"maxiter": 600, "ftol": 1e-10, "gtol": 1e-7})
@@ -162,7 +162,7 @@ def _grad_nb_beta(params, X, y, p, pen_idx):
 
     return g
 
-# ── Poisson GLM (fallback) ─────────────────────────────────────────────────────
+# ── Poisson GLM ─────────────────────────────────────────────────────
 def poisson_glm(y: np.ndarray, X: np.ndarray) -> dict:
     """
     Standard Poisson regression model.
