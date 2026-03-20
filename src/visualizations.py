@@ -346,7 +346,7 @@ def plot_npi_effects(all_results: pd.DataFrame,
     plt.close()
     print(f"  Saved: {output_path}")
 
-# ── Summary dashboard ──────────────────────────────────────────────────────────
+# ── Summary  ──────────────────────────────────────────────────────────
 def plot_summary_dashboard(weekly_props, od_setting, all_results, cluster_summary,
                             output_path: str = "figures/fig0_summary.png"):
     fig = plt.figure(figsize=(18, 10))
