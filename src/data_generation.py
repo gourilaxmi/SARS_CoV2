@@ -17,7 +17,7 @@ This script combines three real-world data sources:
    - From Oxford’s OxCGRT dataset  
    - Denmark policy data between June–October 2021
 
-How to get sequences.fasta (quick steps):
+How to get sequences.fasta:
   1. Go to: https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/
   2. Search for: SARS-CoV-2
   3. Apply filters:
@@ -43,7 +43,7 @@ START_DATE       = date(2021, 6, 1)
 END_DATE         = date(2021, 10, 31)
 
 AGE_GROUPS  = ["0-10", "11-18", "19-39", "40-59", "60+"]
-AGE_WEIGHTS = [0.115, 0.095, 0.275, 0.290, 0.225]   # Approximate Denmark population distribution (2021)
+AGE_WEIGHTS = [0.115, 0.095, 0.275, 0.290, 0.225]   
 
 
 # ── POLYMOD contact matrix ─────────────────────────────────────────────────────
