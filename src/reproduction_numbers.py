@@ -5,7 +5,7 @@ reproduction_numbers.py
 This module estimates individual-level reproduction numbers (Rc) and
 overdispersion using sampled transmission trees.
 
-Idea (based on the paper):
+Idea :
   - Rc for each individual = number of people they infect
   - Fit distributions to these counts:
       • Negative Binomial (for community, school, workplace, etc.)
@@ -54,7 +54,7 @@ def compute_individual_Rc(trees: list[dict],
             if infector is None:
                 continue
 
-            # Apply vaccination effect (reduces transmission weight)
+            # Apply vaccination effect to reduce transmission weight
             vacc_w = vacc_mult_map.get(infector, 1.0)
 
             # Identify setting of transmission
@@ -70,12 +70,12 @@ def compute_individual_Rc(trees: list[dict],
             secondary[infector][setting] += vacc_w
             secondary[infector]["total"] += vacc_w
         
-        # Include all individuals (even those with zero infections)
+        # Include all individuals 
         for ind_id in pop_idx.index:
             for s in settings + ["total"]:
                 infector_counts[ind_id][s].append(secondary[ind_id][s])
     
-    # Build final dataframe (median Rc across trees)
+    # Build final dataframe
     rows = []
     for ind_id, counts in infector_counts.items():
         row = {"individual_id": ind_id}
