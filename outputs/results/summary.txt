@@ -1,18 +1,36 @@
-GYAN REPLICATION — RESULTS SUMMARY
-=======================================================
-Based on: Curran-Sebastian et al. 2026, medRxiv
-
+SARS-CoV-2 TRANSMISSION NETWORK ANALYSIS — DENMARK
 DATA SOURCES
   Genomes    : Real NCBI FASTA
   Network    : POLYMOD (Mossong et al. 2008)
   NPI data   : OxCGRT Denmark (Oxford)
   Vaccination: SSI Denmark rollout schedule
 
-NETWORK
-  Individuals           : 2,000
-  Transmission pairs    : 5,403
-  Setting-linked pairs  : 741 (13.7%)
-  Clusters (size > 5)   : 25
+NETWORK PROPERTIES
+  Nodes (individuals)          : 2,000
+  Edges (transmission pairs)   : 5,403
+  Setting-linked pairs         : 741 (13.7%)
+  Network density              : 0.001351
+  Avg. clustering coefficient  : 0.2743
+
+DEGREE DISTRIBUTION
+  In-degree  — mean: 2.701  max: 20  min: 0
+  Out-degree — mean: 2.701  max: 21  min: 0
+
+CENTRALITY MEASURES
+  Degree centrality     (mean): 0.00270
+  Betweenness centrality(mean): 0.000039
+  Closeness centrality  (mean): 0.07972
+  Eigenvector centrality(mean): 0.000895
+  Top-5 by degree     : ['Node 839', 'Node 986', 'Node 719', 'Node 812', 'Node 1546']
+  Top-5 by betweenness: ['Node 352', 'Node 1190', 'Node 896', 'Node 986', 'Node 1302']
+
+COMMUNITY DETECTION (Transmission Clusters)
+  Clusters found (size > 5)    : 25
+  B.1.177   : 0 clusters  (largest=0)
+  Alpha     : 0 clusters  (largest=0)
+  Eta       : 0 clusters  (largest=0)
+  Delta     : 25 clusters  (largest=77)
+  Omicron   : 0 clusters  (largest=0)
 
 OVERDISPERSION (k parameter)
   total          : k = 0.393  (mean Rc = 0.194)
@@ -34,4 +52,13 @@ VACCINATION EFFECTS
   1-dose: 32.6% reduction  (paper: ~15.5%)
   2-dose: 33.4% reduction  (paper: ~23.5%)
 
-Total runtime: 50 seconds
+FIGURES GENERATED
+  fig0_summary_dashboard.png  — overview dashboard
+  fig1_weekly_proportions.png — replicates paper Fig 2A
+  fig2_age_matrices.png        — replicates paper Fig 2B-G
+  fig3_clusters.png            — replicates paper Fig 3
+  fig4_reproduction_numbers.png— replicates paper Fig 4
+  fig5_npi_effects.png         — replicates paper Fig 5
+  fig6_network_metrics.png     — degree dist, centrality, clustering
+
+Total runtime: 54 seconds
