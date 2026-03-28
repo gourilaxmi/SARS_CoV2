@@ -8,7 +8,7 @@ DATA SOURCES
 NETWORK PROPERTIES
   Nodes (individuals)          : 2,000
   Edges (transmission pairs)   : 5,403
-  Setting-linked pairs         : 741 (13.7%)
+  Setting-linked pairs         : 132 (2.4%)
   Network density              : 0.001351
   Avg. clustering coefficient  : 0.2743
 
@@ -25,32 +25,32 @@ CENTRALITY MEASURES
   Top-5 by betweenness: ['Node 352', 'Node 1190', 'Node 896', 'Node 986', 'Node 1302']
 
 COMMUNITY DETECTION (Transmission Clusters)
-  Clusters found (size > 5)    : 25
+  Clusters found (size > 5)    : 2
   B.1.177   : 0 clusters  (largest=0)
-  Alpha     : 0 clusters  (largest=0)
+  Alpha     : 2 clusters  (largest=9)
   Eta       : 0 clusters  (largest=0)
-  Delta     : 25 clusters  (largest=77)
+  Delta     : 0 clusters  (largest=0)
   Omicron   : 0 clusters  (largest=0)
 
 OVERDISPERSION (k parameter)
-  total          : k = 0.393  (mean Rc = 0.194)
-  household      : k = 1313332.840  (mean Rc = 0.009)
-  school         : k = 0.127  (mean Rc = 0.031)
-  workplace      : k = 0.096  (mean Rc = 0.035)
-  family         : k = 193184.128  (mean Rc = 0.001)
-  community      : k = 0.218  (mean Rc = 0.072)
+  total          : k = 0.425  (mean Rc = 0.183)
+  household      : k = nan  (mean Rc = 0.007)
+  school         : k = nan  (mean Rc = 0.009)
+  workplace      : k = 10.000  (mean Rc = 0.005)
+  family         : k = nan  (mean Rc = 0.002)
+  community      : k = 0.337  (mean Rc = 0.148)
 
 NPI EFFECTS
-  Facial coverings            : increases  beta=+0.280  (not sig.)
-  Gathering restrictions      : REDUCES  beta=-0.620  (not sig.)
-  School restrictions         : REDUCES  beta=-0.144  (not sig.)
-  Workplace restrictions      : REDUCES  beta=-0.216  (not sig.)
-  Travel restrictions         : increases  beta=+0.535  (not sig.)
-  Stay at home                : REDUCES  beta=-0.000  (not sig.)
+  Facial coverings            : increases  beta=+0.047  (not sig.)
+  Gathering restrictions      : REDUCES  beta=-0.904  (not sig.)
+  School restrictions         : REDUCES  beta=-0.665  (not sig.)
+  Workplace restrictions      : REDUCES  beta=-0.473  (not sig.)
+  Travel restrictions         : increases  beta=+0.836  (not sig.)
+  Stay at home                : increases  beta=+0.000  (not sig.)
 
 VACCINATION EFFECTS
-  1-dose: 32.6% reduction  (paper: ~15.5%)
-  2-dose: 33.4% reduction  (paper: ~23.5%)
+  1-dose: 26.7% reduction  (paper: ~15.5%)
+  2-dose: 30.8% reduction  (paper: ~23.5%)
 
 FIGURES GENERATED
   fig0_summary_dashboard.png  — overview dashboard
@@ -61,4 +61,4 @@ FIGURES GENERATED
   fig5_npi_effects.png         — replicates paper Fig 5
   fig6_network_metrics.png     — degree dist, centrality, clustering
 
-Total runtime: 54 seconds
+Total runtime: 17 seconds

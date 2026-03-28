@@ -274,3 +274,64 @@ def run_npi_regression(reg_data: pd.DataFrame, setting: str = "total") -> pd.Dat
     })
 
     return results
+
+
+# ── Run regression for all settings ───────────────────────────────────────────
+def run_all_settings(reg_data: pd.DataFrame) -> pd.DataFrame:
+    """
+    Runs run_npi_regression() for every transmission setting and
+    concatenates the results into a single DataFrame.
+    """
+    frames = []
+    for setting in SETTINGS:
+        res = run_npi_regression(reg_data, setting=setting)
+        if not res.empty:
+            frames.append(res)
+    if not frames:
+        return pd.DataFrame()
+    return pd.concat(frames, ignore_index=True)
+
+
+# ── Vaccination effect summary ─────────────────────────────────────────────────
+def vaccination_effect_summary(results_total: pd.DataFrame) -> pd.DataFrame:
+    """
+    Extracts vaccination coefficients from the 'total' setting regression
+    and converts them to percentage reduction in secondary infections
+    using IRR = exp(beta).
+    """
+    vacc_rows = results_total[
+        results_total["covariate"].isin(["vacc_one_dose", "vacc_two_doses"])
+    ].copy()
+
+    if vacc_rows.empty:
+        return pd.DataFrame()
+
+    vacc_rows["IRR"]           = np.exp(vacc_rows["beta"])
+    vacc_rows["reduction_pct"] = (1 - vacc_rows["IRR"]) * 100
+    vacc_rows["ci_low_irr"]    = np.exp(vacc_rows["ci_low"])
+    vacc_rows["ci_high_irr"]   = np.exp(vacc_rows["ci_high"])
+
+    return vacc_rows[["covariate", "beta", "IRR",
+                       "reduction_pct", "ci_low_irr", "ci_high_irr", "pvalue"]]
+
+
+# ── Age-group transmission IRR ─────────────────────────────────────────────────
+def age_transmission_irr(results_total: pd.DataFrame) -> pd.DataFrame:
+    """
+    Extracts age-group coefficients and returns IRR (relative to the 60+
+    reference group) with 95% confidence intervals.
+    """
+    age_rows = results_total[
+        results_total["covariate"].str.startswith("age_")
+    ].copy()
+
+    if age_rows.empty:
+        return pd.DataFrame()
+
+    age_rows["IRR"]        = np.exp(age_rows["beta"])
+    age_rows["ci_low_irr"] = np.exp(age_rows["ci_low"])
+    age_rows["ci_high_irr"]= np.exp(age_rows["ci_high"])
+    age_rows["age_group"]  = age_rows["covariate"].str.replace("age_", "", regex=False)
+
+    return age_rows[["age_group", "beta", "IRR",
+                     "ci_low_irr", "ci_high_irr", "pvalue"]]

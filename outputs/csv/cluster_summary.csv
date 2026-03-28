@@ -1,6 +1,6 @@
 variant,n_clusters,largest_size,mean_regions,prop_individuals
 B.1.177,0,0,0.0,0
-Alpha,0,0,0.0,0
+Alpha,2,9,4.5,16
 Eta,0,0,0.0,0
-Delta,25,77,4.36,297
+Delta,0,0,0.0,0
 Omicron,0,0,0.0,0
