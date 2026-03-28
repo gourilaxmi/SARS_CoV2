@@ -1,0 +1,4 @@
+strategy,collapse_at_50pct,lcc_at_10pct_removal,lcc_at_20pct_removal,lcc_at_30pct_removal
+Betweenness (Bridger),0.0,0.029,0.016,0.006
+Degree (Hub),0.0,0.067,0.04,0.007
+Random Baseline,0.0,0.13570000000000002,0.11815,0.10135000000000001

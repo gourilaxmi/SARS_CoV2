@@ -1,4 +1,8 @@
+============================================================
 SARS-CoV-2 TRANSMISSION NETWORK ANALYSIS — DENMARK
+Team GYAN | Replication: Curran-Sebastian et al. (2026)
+============================================================
+
 DATA SOURCES
   Genomes    : Real NCBI FASTA
   Network    : POLYMOD (Mossong et al. 2008)
@@ -6,38 +10,32 @@ DATA SOURCES
   Vaccination: SSI Denmark rollout schedule
 
 NETWORK PROPERTIES
-  Nodes (individuals)          : 2,000
-  Edges (transmission pairs)   : 5,403
+  Nodes                        : 2,000
+  Edges                        : 5,403
   Setting-linked pairs         : 132 (2.4%)
   Network density              : 0.001351
   Avg. clustering coefficient  : 0.2743
+  Mean degree centrality       : 0.00270
+  Mean betweenness centrality  : 0.000039
 
 DEGREE DISTRIBUTION
-  In-degree  — mean: 2.701  max: 20  min: 0
-  Out-degree — mean: 2.701  max: 21  min: 0
-
-CENTRALITY MEASURES
-  Degree centrality     (mean): 0.00270
-  Betweenness centrality(mean): 0.000039
-  Closeness centrality  (mean): 0.07972
-  Eigenvector centrality(mean): 0.000895
-  Top-5 by degree     : ['Node 839', 'Node 986', 'Node 719', 'Node 812', 'Node 1546']
-  Top-5 by betweenness: ['Node 352', 'Node 1190', 'Node 896', 'Node 986', 'Node 1302']
+  In-degree  — mean: 2.701  max: 20
+  Out-degree — mean: 2.701  max: 21
 
 COMMUNITY DETECTION (Transmission Clusters)
-  Clusters found (size > 5)    : 2
-  B.1.177   : 0 clusters  (largest=0)
-  Alpha     : 2 clusters  (largest=9)
-  Eta       : 0 clusters  (largest=0)
-  Delta     : 0 clusters  (largest=0)
-  Omicron   : 0 clusters  (largest=0)
+  Clusters found (size > 5): 2
+  B.1.177   : 0 clusters (largest=0)
+  Alpha     : 2 clusters (largest=9)
+  Eta       : 0 clusters (largest=0)
+  Delta     : 0 clusters (largest=0)
+  Omicron   : 0 clusters (largest=0)
 
 OVERDISPERSION (k parameter)
   total          : k = 0.425  (mean Rc = 0.183)
-  household      : k = nan  (mean Rc = 0.007)
-  school         : k = nan  (mean Rc = 0.009)
+  household      : k = NaN (sparse)  (mean Rc = 0.007)
+  school         : k = NaN (sparse)  (mean Rc = 0.009)
   workplace      : k = 10.000  (mean Rc = 0.005)
-  family         : k = nan  (mean Rc = 0.002)
+  family         : k = NaN (sparse)  (mean Rc = 0.002)
   community      : k = 0.337  (mean Rc = 0.148)
 
 NPI EFFECTS
@@ -49,16 +47,42 @@ NPI EFFECTS
   Stay at home                : increases  beta=+0.000  (not sig.)
 
 VACCINATION EFFECTS
-  1-dose: 26.7% reduction  (paper: ~15.5%)
-  2-dose: 30.8% reduction  (paper: ~23.5%)
+  1-dose: 26.7% reduction (paper: ~15.5%)
+  2-dose: 30.8% reduction (paper: ~23.5%)
+
+EXTENSION: ROBUSTNESS & TARGETED ATTACK ANALYSIS
+  Research question: Bridger vs Hub removal for epidemic control
+
+  Betweenness (Bridger)
+    LCC drops to 50% at : 0.0% removal
+    LCC after 10% removal: 2.9%
+    LCC after 20% removal: 1.6%
+    LCC after 30% removal: 0.6%
+
+  Degree (Hub)
+    LCC drops to 50% at : 0.0% removal
+    LCC after 10% removal: 6.7%
+    LCC after 20% removal: 4.0%
+    LCC after 30% removal: 0.7%
+
+  Random Baseline
+    LCC drops to 50% at : 0.0% removal
+    LCC after 10% removal: 13.6%
+    LCC after 20% removal: 11.8%
+    LCC after 30% removal: 10.1%
+
+  CONCLUSION: Betweenness (Bridger) is the more effective
+  disruption strategy for this epidemic network.
 
 FIGURES GENERATED
-  fig0_summary_dashboard.png  — overview dashboard
-  fig1_weekly_proportions.png — replicates paper Fig 2A
+  fig0_summary_dashboard.png   — overview dashboard
+  fig1_weekly_proportions.png  — replicates paper Fig 2A
   fig2_age_matrices.png        — replicates paper Fig 2B-G
   fig3_clusters.png            — replicates paper Fig 3
   fig4_reproduction_numbers.png— replicates paper Fig 4
   fig5_npi_effects.png         — replicates paper Fig 5
-  fig6_network_metrics.png     — degree dist, centrality, clustering
+  fig6_network_metrics.png     — degree dist, centrality
+  fig7_attack_analysis.png     — EXTENSION: 4-panel attack
+  fig8_attack_interpretation.png — EXTENSION: key finding
 
-Total runtime: 17 seconds
+Total runtime: 41 seconds
